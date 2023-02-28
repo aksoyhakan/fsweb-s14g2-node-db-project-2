@@ -24,4 +24,19 @@ const create = (car) => {
     });
 };
 
-module.exports = { getAll, getById, getByVin, create };
+const updateById = (id, car) => {
+  return db("cars")
+    .where({ id })
+    .update(car, ["id", "vin", "make", "model", "mileage"]);
+};
+
+const remove = (id) => {
+  return db("cars")
+    .where({ id })
+    .del()
+    .then((res) => {
+      return id;
+    });
+};
+
+module.exports = { getAll, getById, getByVin, create, updateById, remove };
